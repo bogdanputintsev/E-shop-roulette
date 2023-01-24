@@ -54,9 +54,13 @@
 
 # Content
 *.png
+*.jpg
+*.ico
 *.mp3
 *.eot
 *.ttf
+*.otf
 *.woff*
 *.svg
 *.css
+*.db
