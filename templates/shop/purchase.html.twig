@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <section class="purchase">
+            <h3>Покупка товара</h3>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="game-logo" style="background: url(/img/game/{{ game[0]['image_key'] }}-BIG.png) no-repeat center"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="description">
+                            <h2>{{ game[0]['name'] }}</h2>
+                            <div class="col-md-7">
+                                <table>
+                                    {% if game[0]['genre'] is not null %}
+                                    <tr>
+                                        <th><i class="fa fa-gamepad" aria-hidden="true"></i> Жанр</th>
+                                        <th>{{ game[0]['genre'] }}</th>
+                                    </tr>
+                                    {% endif %}
+                                    {% if game[0]['platforms'] is not null %}
+                                    <tr>
+                                        <th><i class="fa fa-desktop" aria-hidden="true"></i> Платформа</th>
+                                        <th>{{ game[0]['platforms'] }}</th>
+                                    </tr>
+                                    {% endif %}
+                                    {% if game[0]['language'] is not null %}
+                                    <tr>
+                                        <th><i class="fa fa-globe" aria-hidden="true"></i> Язык</th>
+                                        <th>{{ game[0]['language'] }}</th>
+                                    </tr>
+                                    {% endif %}
+                                    {% if game[0]['release_date'] is not null %}
+                                    <tr>
+                                        <th><i class="fa fa-calendar-o" aria-hidden="true"></i> Дата выхода</th>
+                                        <th>{{ game[0]['release_date']|date('d.m.Y') }}</th>
+                                    </tr>
+                                    {% endif %}
+                                    {% if game[0]['game_mode'] is not null %}
+                                    <tr>
+                                        <th><i class="fa fa-trophy" aria-hidden="true"></i> Режим игры</th>
+                                        <th>{{ game[0]['game_mode'] }}</th>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="desc-price">
+                                    <h2>{{ game[0]['price']}} &#8381;</h2>
+                                    <ul>
+                                        <li>Моментальная доставка в <a href="{{ path('orders')}}" class="accent-color">Мои покупки</a></li>
+                                        <li>Гарантии качества товара</li>
+                                        <li><a href="{{ path('feedback')}}" class="accent-color">Отзывы</a> о магазине</li>
+                                        {% if keys_available == true %}
+                                            <li>В наличии</li>
+                                        {% else %}
+                                            <li>Нет в наличии</li>
+                                        {% endif %}
+                                    </ul>
+                                    {% if balance < game[0]['price'] %}
+                                        <button id="purchase_button" class="button-blue"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Купить</button>
+                                    {% else %}
+                                        <button id="button-buyGame" class="button-blue" game-id="{{ game[0]['id'] }}" price="{{ game[0]['price'] }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Купить</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="sys-requirements">
+                                    {% if game[0]['OS'] is not null
+                                        or game[0]['CPU'] is not null
+                                        or game[0]['RAM'] is not null
+                                        or game[0]['disk_space'] is not null
+                                        or game[0]['videocard'] is not null %}
+                                        <p>Системные требования</p>
+                                    {% endif %}
+
+                                    {% if game[0]['OS'] is not null %}
+                                        <p>Операционная система</p>
+                                        <p>{{ game[0]['OS'] }}</p>
+                                    {% endif %}
+                                    {% if game[0]['CPU'] is not null %}
+                                        <p>Процессор</p>
+                                        <p>{{ game[0]['CPU'] }}</p>
+                                    {% endif %}
+                                    {% if game[0]['RAM'] is not null %}
+                                        <p>Оперативная память</p>
+                                        <p>{{ game[0]['RAM'] }}</p>
+                                    {% endif %}
+                                    {% if game[0]['disk_space'] is not null %}
+                                        <p>Свободного места на диске</p>
+                                        <p>{{ game[0]['disk_space'] }}</p>
+                                    {% endif %}
+                                    {% if game[0]['videocard'] is not null %}
+                                        <p>Видеопамять</p>
+                                        <p>{{ game[0]['videocard'] }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="game-description editable">
+                            <h3>Описание</h3>
+                            <p>{{ game[0]['description'] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/pjax-master/pjax.js"></script>
+    <script src="/libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/purchase.js"></script>
+
+{% endblock %}

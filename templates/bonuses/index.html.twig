@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <section class="bonuses">
+            <h3>Бонусы</h3>
+            <div class="container">
+                <div class="row">
+                    <div class="bonuses-keys" style="background: url(/img/bonuses/keys.png) no-repeat center">
+                        <div id="bonuses-waiting">
+                            <h2>Дополнительные бонусы</h2>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <a class="button-big" id="writeFeedback">Оставить отзыв</a>
+                                <p>Оставь свой отзыв и получи бонус!</p>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="button-big" id="joinGroup">Вступить в группу</a>
+                                <p>Вступи в нашу группу и получи бонус!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <audio id="audio" src="/includes/roulette.mp3" autostart="false" ></audio>
+        <section id="game" class="game">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="b-color">Ваша игра</h2>
+                        {% if game_case == "Done" %}
+                            <p id="case_id" hidden>{{ case_id }}</p>
+                            <div class="roulette bonus-roulette">
+                                <img draggable="false" src="/img/game/roulette.png" width="960" height="356" alt="arrow" class="arrow">
+                                <div class="elements" id="elements-{{ case_id }}">
+                                    <div class="elements-inner">
+                                        {% set rand_val = random(1, game|length) %}
+                                        {% for i in 1..55 %}
+                                            {% set rand_val = random(1, game|length) %}
+                                            <img src="/img/game/{{ game[rand_val - 1]['image_key'] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ rand_val - 1 }}">
+                                        {% endfor %}
+
+                                        {% set rand_val = random(1, game_array_drop_sum) %}
+
+                                        {% for i in 1..20 %}
+                                            {% set tmp_sum = 0 %}
+                                            {% set rand_val = random(1, game_array_drop_sum) %}
+                                            {% for element in 1..game|length %}
+                                                {% if rand_val < game[element - 1]['drop_chance'] + tmp_sum %}
+                                                    <img src="/img/game/{{ game[element - 1]['image_key'] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ element - 1 }}">
+                                                    {% set element = game|length %}
+                                                {% else %}
+                                                    {% set tmp_sum = tmp_sum + game[element - 1]['drop_chance'] %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="button-big" id="roulette-premium">Испытать удачу!</a>
+                            <a class="w-color activate-info">Как активировать выигрыш?</a>
+                        {% else %}
+                            <div class="roulette b-color">
+                                <i class="fa fa-spin fa-refresh fa-5x" aria-hidden="true"></i>
+                                <h3 class="b-color">На данный момент игра недоступна</h3>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/pjax-master/pjax.js"></script>
+    <script src="libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/roulette.js"></script>
+    <script src="js/bonuses.js"></script>
+{% endblock %}

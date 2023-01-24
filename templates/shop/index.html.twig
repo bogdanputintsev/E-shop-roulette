@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <section class="shop">
+            <div class="container">
+                <div class="row">
+                    <h2>Каталог игр</h2>
+                    <div class="catalog">
+                        <div class="col-md-12">
+                            {% if products|length > 0 %}
+                                {% for row in 1..products|length %}
+                                    <a href="{{ path('purchase', { id: products[row-1]['id'] }) }}">
+                                        <div class="goods" style="background: url(/img/game/{{ products[row-1]['image_key'] }}-WIDE.png) no-repeat center; background-size:cover;">
+                                            <div class="price">
+                                                <b>{{ products[row-1]['price'] }}&#8381;</b>
+                                                <div class="button">Купить</div>
+                                            </div>
+                                            <p class="b-color">{{ products[row-1]['name'] }}</p>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <h2>Каталог аккаунтов</h2>
+                    <div class="accounts">
+                        <div class="col-md-12">
+                            {% if accounts|length > 0 %}
+                                {% for row in 1..accounts|length %}
+                                    <a href="{{ path('purchase', { id: accounts[row-1]['id'] }) }}">
+                                        <div class="goods" style="background: url(/img/game/{{ accounts[row-1]['image_key'] }}-WIDE.png) no-repeat center; background-size:cover;">
+                                            <div class="price">
+                                                <b>{{ accounts[row-1]['price'] }}&#8381;</b>
+                                                <div class="button">Купить</div>
+                                            </div>
+                                            <p class="b-color">{{ accounts[row-1]['name'] }}</p>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/pjax-master/pjax.js"></script>
+    <script src="/libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="/js/common.js"></script>
+{% endblock %}

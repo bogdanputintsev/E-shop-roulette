@@ -1,0 +1,579 @@
+@import "fonts"
+@import "libs"
+@import "vars"
+@import "_mixins/gradient"
+@import "_mixins/gradient_border"
+@import "_mixins/box-shadow"
+
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+html, body
+	height: 100%
+	//height: 2000px
+
+body
+	font-size: 12px
+	min-width: 320px
+	position: relative
+	line-height: 1.5
+	font-family: $default-font
+	font-weight: normal
+	overflow-x: hidden
+	opacity: 1
+	h1, h2, h3
+		text-align: center
+		color: #000
+	h1
+		font-size: 6em
+	h2
+		font-size: 3em
+	h3
+		font-size: 1.4em
+	ul
+		list-style-type: none
+		display: inline-block
+		margin: 11px 0
+		padding: 0
+
+	li
+		padding: 1px 5px
+		float: left
+		margin-right: 20px
+		text-align: center
+		text-decoration: none
+	a, a:hover
+		color: #000
+		text-decoration: none
+	b
+		font-weight: bold
+		font-size: 3em
+		margin: 0
+		padding: 0
+
+.no-padding
+	padding: 0
+
+.w-color
+	color: #fff	!important
+.b-color
+	color: #000 !important
+	
+.menu 
+	text-align: center
+	height: 45px
+	
+	img
+		padding-right: 5px
+	li
+		border: 1px solid transparent
+		border-radius: 8px
+
+	li.active, li:hover
+		+linearGradient(#f1f1f1, #d8d8d8, 'radial')
+		cursor: pointer
+
+.nav
+	+linearGradient(#FFF, #EFEFEF, 'vertical');
+
+.back-img
+	display: -webkit-flex
+	display: -moz-flex
+	display: -ms-flex
+	display: -o-flex
+	display: flex
+	background-size: cover
+	margin-top: -3px
+	max-width: 100%
+	height: 267px
+	text-align: center
+	p
+		margin: 0
+		padding: 0
+	a
+		color: #fff
+		margin-left: 25px
+	.left-side, .right-side
+		padding-top: 50px
+		line-height: 1.3
+		text-align: right
+	.center-side
+		text-align: center
+		font-family: $second-font
+		font-size: 2.3em
+		font-weight: 100
+	.right-side
+		text-align: left
+
+a.button, a.button-big, a.button-blue
+	text-align: center
+	color: #000
+	margin: 0	
+	height: 30px
+	width: 125px
+	background-color: #fff
+	padding: 7px 12px
+	border-radius: 12px
+	+box-shadow(0, 0, 3px, #333)
+	display: block
+	margin-bottom: 7px
+	cursor: pointer
+	transition: background-color .25s
+	&:hover
+		background-color: #e9e9e9
+	img
+		margin-left: 8px
+a.button-big
+	height: 60px
+	width: 250px
+	font-size: 2em
+	padding: 12px
+
+
+
+.header, .roulette, .offer, .game, .online, .bonuses-keys, .background-404
+	h1, h2, h3, p, b
+		color: #fff
+	
+.logo
+	margin: auto
+	position: relative
+	text-align: center
+	height: auto
+	width: 100%
+	text-align: center
+	margin: auto 0
+	max-width: 449px
+	max-height: 189px
+
+.online
+	text-align: center
+	width: 100%
+	height: 167px
+	&>.block 
+		position: relative
+		display: inline-block
+		margin: auto 0
+		width: 110px
+		height: 132px
+		border-radius: 8px
+		background-color: #fff
+		margin: 18px 10px
+		+box-shadow(1px, 1px, 15px, #000)
+		background: url(../img/winnings/sample_game.png) no-repeat center
+		.values
+			position: absolute
+			bottom: 0.2em
+			left: 0
+			text-align: center
+			padding: 0
+			margin-left: 8px
+			p
+				width: 100%
+				font-weight: bold
+				margin: 0
+				line-height: 1
+				font-size: 1.2em
+				text-shadow: 0 0 5px #000
+
+.offer
+	position: relative
+	.premium
+		background: url(../img/offer/premium_case.png) no-repeat center
+	.premium.active
+		background: url(../img/offer/premium_case_active.png) no-repeat center
+	.vip	
+		background: url(../img/offer/vip_case.png) no-repeat center
+	.vip.active
+		background: url(../img/offer/vip_case_active.png) no-repeat center
+
+	.block
+	 	width: 418px
+	 	height: 344px
+	 	margin: 0 auto
+	 	padding-top: 85px
+	h2
+	 	padding-bottom: 40px
+	h2,p
+		line-height: 1.2
+		margin: 0
+		width: 48%
+		margin: 0 auto
+		text-align: center
+		padding-left: 10px
+	a
+		margin: 0 auto
+		margin-top: 10px
+.block h2
+	color: #fff
+	padding-bottom: 5px
+
+.game
+	color: #fff
+	height: 600px
+	width: 100%
+	text-align: center
+	h2, a
+		color: #fff
+	a.button-big
+		color: #000
+		margin: 5px auto
+	h2
+		padding: 25px 0 0
+		margin-bottom: 0
+
+
+.roulette
+	display: block
+	background: url(../img/game/roulette.png) no-repeat center
+	width: 100%
+	height: 350px
+.elements
+	position: absolute
+	display: block
+	top: 17em
+	left: 10px
+	right: 0
+	height: 163px
+	width: 771px
+	margin: 0 auto
+.element
+	position: related
+	display: inline-block
+	height: 93%
+	width: 100px
+	border-radius: 6px
+	background-color: #fff
+	background: url(../img/game/icon1.png) no-repeat center
+	&:nth-child(2n)
+		background-image: url(../img/game/icon2.png)
+
+	margin: 6px 3px
+	+box-shadow(1px, 1px, 20px, #000)
+		
+.cases
+	background: url(../img/background.png)
+	background-position: 0 -1px
+	min-height: 700px		
+.case
+	width: 100%
+	height: 166px
+	border-radius: 8px
+	background-color: #000
+	margin-bottom: 20px
+	background-color: #fff
+	cursor: pointer
+	+box-shadow(1px, 1px, 5px, #000)
+	h3, p
+		position: absolute
+		bottom: 1em
+		left: 0
+		right: 0
+		text-align: center
+		color: #fff
+	h3
+		bottom: 1.2em
+	h2
+		position: absolute
+		color: #fff
+		bottom: 0.7em
+		left: 0
+		right: 0
+
+	&:hover .info
+		opacity: 0
+	&:hover .open
+		opacity: 1
+
+.info
+	opacity: 1
+	background: url(../img/cases/gradient.png)
+	width: 100%
+	height: 100%
+	transition: opacity 1.5s ease-out
+.open
+	transition: opacity 0.75s ease
+	opacity: 0
+	position: absolute
+	top: 0
+	width: 263px
+	height: 166px
+	border-radius: 8px
+	+linearGradient(rgba(37, 213, 243, 0.75), rgba(5,38,243, 0.75), 'vertical');
+
+.bonuses-keys, .bonuses-youtube
+	width: 100%
+	height: 341px
+	padding-top: 70px
+	h2
+		margin: 0
+		line-height: 1.2
+	a.button-big
+		margin: 0 auto
+		margin-top: 30px
+	p
+		text-align: center
+		width: 80%
+		margin: 0 auto
+		margin-top: 5px
+.bonuses-youtube
+	padding-top: 50px
+	a.button-big
+		margin-top: 160px
+
+.guarantees
+	text-align: center
+	p
+		width: 80%
+		margin: 0 auto 
+	.benefits, .youtube-chanel
+		margin: 40px auto
+		width: 800px
+		transition: background-image 0.2s ease-out
+	.benefits
+		height: 314px
+		background: url(../img/guarantees/benefits.png) no-repeat
+		&:hover
+			background-image: url(../img/guarantees/benefits_hover.png)
+	.youtube-chanel
+		height: 227px
+		background: url(../img/guarantees/button.png) no-repeat
+		&:hover
+			background-image: url(../img/guarantees/button_hover.png)
+	h3
+		margin-bottom: 0
+	a
+		height: 100%
+		width: 100%
+		display: block
+
+.shop
+	a.button-blue
+		background-color: $accent
+		color: #fff
+		margin: 40px auto 60px auto
+
+.catalog
+	.goods
+		cursor: pointer
+		color: #fff
+		text-align: center
+		display: inline-block
+		margin: 0 30px 55px 30px
+		width: 165px
+		height: 220px
+		border-radius: 12px
+		+box-shadow(1px, 1px, 8px, #000)
+		p
+			text-align: center
+			font-weight: bold
+		&:hover .price
+			opacity: 1
+			b
+				transform: translate(0, 1em)
+			a
+				transform: translate(0, -2em)
+.accounts
+	.goods
+		cursor: pointer
+		display: inline-block
+		margin: 0 30px 80px 30px
+		color: #fff
+		text-align: center
+		width: 200px
+		height: 200px
+		border-radius: 50%
+		background-color: #fff
+		+box-shadow(1px, 1px, 10px, #000)
+		.price
+			width: 100%
+			height: 100%
+			border-radius: 50%
+		&:hover .price
+			opacity: 1
+			b
+				transform: translate(0, 0.7em)
+			a
+				transform: translate(0, -3em)
+		p
+			text-align: center
+			font-weight: bold
+			margin: 0
+			line-height: 1.2
+			padding-top: 15px
+			&:last-child
+				padding: 0
+.price
+	cursor: pointer
+	opacity: 0
+	+linearGradient(rgba(37, 213, 243, 0.75), rgba(5,38,243, 0.75), 'vertical');
+	width: 100%
+	height: 100%
+	border-radius: 12px
+	padding-top: 3em
+	transition: opacity .25s ease-in
+	a
+		color: #000
+		margin: 0 auto
+		margin-top: 5em
+		transition: transform .5s ease
+	b
+		display: block
+		transition: transform .5s ease
+
+.page-404
+	width: 100%
+	height: 100%
+	overflow-y: hidden
+.background-404
+	width: 100%
+	height: 100vh
+	+linearGradient(rgba(39, 64, 243, 0.85), rgba(54, 223, 247, 0.85), 'vertical');
+	text-align: center
+	color: #fff
+	img
+		margin-top: 20vh
+	h1, p
+		margin: 0
+		line-height: 1.2	
+	p
+		font-size: 1.5em
+
+.purchase
+	margin-top: 40px
+	.game-logo, .description
+		display: block
+		width: 340px
+		height: 510px
+		border-radius: 10px
+		margin: 10px auto
+		+box-shadow(1px, 1px, 7px, #000)
+	.description
+		width: 100%
+		h2
+			margin: 10px 0
+			color: $accent
+		table
+			margin-left: 15px
+			text-align: left
+			width: 100%
+			margin-top: 22px
+		th
+			font-weight: 100
+			padding: 2px
+			&:nth-child(2)
+				color: #999
+				font-weight: 100
+		.desc-price	
+			h2
+				text-align: left
+				color: #000
+			line-height: 1.1	
+			a
+				color: $accent
+			li:before
+				position: absolute
+				content: '\2022'
+				font-size: 30px
+				left: 0
+				margin-top: -10px
+				color: $accent
+		.sys-requirements
+			margin: 30px 15px
+			p
+				margin: 0
+				&:first-child
+					color: $accent
+					margin-bottom: 10px
+				&:nth-child(2n)
+					color: #999
+		.screen
+			width: 225px
+			height: 175px
+			display: inline-block
+			margin-top: 45px
+			border-radius: 14px
+			+box-shadow(1px, 1px, 5px, #000)
+
+			&:first-child
+				margin-right: 15px
+			&:hover .hover-text
+				opacity: 1
+
+			.hover-text
+				opacity: 0
+				transition: opacity 0.25s ease-out
+				cursor: pointer
+				+linearGradient(rgba(37, 213, 243, 0.75), rgba(5,38,243, 0.75), 'vertical');
+				height: 100%
+				border-radius: 14px
+				padding-top: 1em
+				h3
+					color: #fff
+					width: 70%
+					margin: 25% auto
+	.game-description
+		display: block
+		border-radius: 15px
+		margin: 20px 0 30px 0
+		padding: 5px 0 10px 0
+		+box-shadow(1px, 1px, 7px, #000)
+		width: 100%
+		height: 100%
+		h3, p
+			padding: 0 25px
+			text-align: left
+
+.feedback
+	text-align: center			
+
+				
+
+		
+
+
+
+
+
+
+
+
+
+.footer	
+	background-color: #3579f9
+	color: #fff
+	text-align: center
+	padding: 35px 0
+	p
+		margin-top: 0
+	a
+		margin-right: 5px
+
+
+
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+@import "media" // Всегда в конце

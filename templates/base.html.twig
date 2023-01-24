@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Sqrtkeys.ru — интернет-магазин лицензионных ключей и аккаунтов Steam, Origin, Uplay и т.д.</title>
+        <meta name="description" content="">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=1024">
+        <!--<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">-->
+        <!--<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png"> -->
+
+        <!-- Chrome, Firefox OS and Opera -->
+        <meta name="theme-color" content="#1f79db">
+        <!-- Windows Phone -->
+        <meta name="msapplication-navbutton-color" content="#1f79db">
+        <!-- iOS Safari -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="#1f79db">
+        <style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0&appId=2472004989706715&autoLogAppEvents=1"></script>
+        <div class="preloader" id="preloader">
+            <div class="loading" id="loading">
+                <img src="/img/404.png" alt="Загрузка страницы">
+            </div>
+        </div>
+        <div class="nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="menu">
+                            <ul>
+                                <a href="{{ path('main') }}">
+                                    <li {% if page == 'index' %} class="active"{% endif %}><i class="fa fa-home" aria-hidden="true"></i> Главная</li>
+                                </a>
+                                <a href="{{ path('shop') }}">
+                                    <li {% if page == 'shop' %} class="active"{% endif %}><i class="fa fa-shopping-cart" aria-hidden="true"></i> Магазин</li>
+                                </a>
+
+                                {% if username != "" %}
+                                    <a href="{{ path('orders') }}">
+                                        <li {% if page == 'orders' %} class="active"{% endif %}><i class="fa fa-shopping-bag" aria-hidden="true"></i> Мои покупки</li>
+                                    </a>
+                                {% endif %}
+
+                                <a href="{{ path('feedback') }}">
+                                    <li {% if page == 'feedback' %} class="active"{% endif %}><i class="fa fa-comments" aria-hidden="true"></i> Отзывы</li>
+                                </a>
+                                <a href="{{ path('bonuses') }}">
+                                    <li {% if page == 'bonuses' %} class="active"{% endif %}><i class="fa fa-gift" aria-hidden="true"></i> Бонусы</li>
+                                </a>
+                                <a href="{{ path('guarantees') }}">
+                                    <li{% if page == 'guarantees' %} class="active"{% endif %}><i class="fa fa-shield" aria-hidden="true"></i> Гарантии</li>
+                                </a>
+                                <a target="_blank" href="{{ path('community') }}">
+                                    <li><i class="fa fa-question-circle" aria-hidden="true"></i> Поддержка</li>
+                                </a>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="header">
+            <div class="container-fluid no-padding">
+                <div class="row">
+                    <div class="back-img" style="background: url('/img/header/background header.png') no-repeat center">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="left-side">
+                                <p>Испытало удачу</p>
+                                <b id="winnings_count">0</b>
+                                <p>Онлайн</p>
+                                <b id="online_count">0</b>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <a href="{{ path('main') }}"><img src="/img/Logo.png" alt="Ключи" class="logo"/></a>
+                            <p class="center-side">ИСПЫТАЙ УДАЧУ!</p>
+                        </div>
+
+                        {% if uid != "none" %}
+                        <div class="col-md-4 col-sm-4">
+                            <div class="right-side logged-in">
+                                <div class="user">
+                                    <div class="avatar" style="background: url({{ avatar }}) no-repeat center;"></div>
+                                    <a href="{{ path('logout') }}" class="button logout">Выход</a>
+                                </div>
+                                <p class="username">{{ username }}</p>
+
+                                <div class="balance">
+                                    <p id="balance-value">Баланс: {{ balance }}&#8381;</p>
+                                    <a class="button-blue pay" href="{{ path('paymentlink') }}">Пополнить счет</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4 col-sm-4">
+                            <div class="right-side">
+                                <a href="{{ path('vk') }}" class="button">Войти через <i class="fa fa-vk" aria-hidden="true"></i></a>
+                                <a href="{{ path('steam') }}" class="button">Войти через <i class="fa fa-steam-square" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="winnings">
+            <div class="container-fluid no-padding">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="b-color">Выигрыши онлайн</h3>
+                        <div class="online" style="background: url(/img/winnings_back.png) no-repeat center">
+                            <div class="online-inner">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {% block body %}{% endblock %}
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-2 col-md-offset-1">
+                        <ul>
+                            <li><a href="{{ path('main') }}">Главная</a></li>
+                            <li><a href="{{ path('shop') }}">Магазин</a></li>
+                            <li><a href="{{ path('feedback') }}">Отзывы</a></li>
+                            <li><a href="{{ path('bonuses') }}">Бонусы</a></li>
+                            <li><a href="{{ path('guarantees') }}">Гарантии</a></li>
+                            <li><a target="_blank" href="{{ path('community') }}">Поддержка</a></li>
+                        </ul>
+                        <p class="copyright">SQRTKEYS.RU</p>
+                        <p class="copyunder">&copy; 2019</p>
+                    </div>
+                    <div class="col-md-6 editable">
+                        <div id="footer"><p style="text-align: center;"><strong>SQRTKEYS.RU</strong> – </p><p style="text-align: center;">Открывая кейс, вы получаете возможность выиграть дорогую игру, и, если вдруг она уже есть у вас в библиотеке, вы сможете продать её прямо на нашем сайте. Выигрыш гарантирован вне зависимости от открытия выбранного вами кейса. Огромный ассортимент, ежедневные пополнения, возможность предложить создать кейс с любыми желанными играми, открытое геймерское комьюнити, возможность продажи своего аккаунта или гифта, круглосуточная поддержка и многое другое!</p></div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--<img src="img/paylist.png" border="0"/> -->
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div id="window">
+            <h3>Ваш выигрыш!</h3>
+            <div id="window-image" class="circle" style="background: none;"></div>
+            <h3 id="window-name"></h3>
+            <a class="button-blue" id="button-sell">Продать за &#8381;</a>
+            <a class="button" id="button-take">Забрать выигрыш</a>
+            <p>Активация в Steam <a class="activate-info">Как активировать выигрыш?</a></p>
+        </div>
+        <div id="window-loading">
+            <center><i class="fa fa-spinner fa-spin fa-5x fa-fw" aria-hidden="true"></i></center>
+            <h3>Загрузка!</h3>
+            <p>Операция выполняется</p>
+        </div>
+        <div id="window-sell">
+            <h3>Ваш выигрыш!</h3>
+            <div id="window-sell-image" class="circle" style="background: none;"></div>
+            <h3 id="window-sell-name"></h3>
+            <h2>Ключ был добавлен в раздел <a href="{{ path('orders') }}">Мои покупки</a></h2>
+            <p>Активация в Steam <a class="activate-info">Как активировать выигрыш?</a></p>
+        </div>
+        <div id="window-authorize">
+            <h3>Пожалуйста, авторизируйтесь</h3>
+            <p>Для начала игры необходимо войти в акаунт</p>
+            <div class="col-md-6">
+                <a href="{{ path('vk') }}" class="button">Войти через <i class="fa fa-vk" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ path('steam') }}" class="button">Войти через <i class="fa fa-steam-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div id="window-balance">
+            <h3>Пожалуйста, пополните счет</h3>
+            <div class="payform">
+                <p>PayForm</p>
+            </div>
+        </div>
+        <div id="window-pay">
+            <h3>Пополнить баланс</h3>
+            <div class="payform">
+                <p>PayForm</p>
+            </div>
+        </div>
+        <div id="window-message">
+            <h3 id="message-header">Неизвестная ошибка</h3>
+            <p id="message-text">Пожалуйста, попробуйте еще раз</p>
+        </div>
+        <div id="window-giftTime">
+            <center><i class="fa fa-clock-o fa-5x" aria-hidden="true"></i></center>
+            <h3>Нужно подождать!</h3>
+            <p>Рулетка доступна пользователям один раз в день</p>
+        </div>
+
+        {% block javascripts %}{% endblock %}
+
+    </body>
+</html>
+

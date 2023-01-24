@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <section class="orders">
+            <h3>Ваши покупки и выигрыши</h3>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="winnings-table">
+                            {% if orders|length == 0 %}
+                            <table>
+                                <tr>
+                                    <th>На данный момент у вас нет покупок или выигрышей...</th>
+                                </tr>
+                            </table>
+                            {% else %}
+                            <table>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Информация</th>
+                                    <th>Дата</th>
+                                </tr>
+                                {% for row in 1..orders|length %}
+                                    <tr>
+                                        <th>{{ orders[row-1]['name'] }}</th>
+                                        <th>{{ orders[row-1]['info']}}</th>
+                                        <th>{{ orders[row-1]['date']|date('d.m.Y H:m:s') }}</th>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/pjax-master/pjax.js"></script>
+    <script src="libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="/js/common.js"></script>
+{% endblock %}

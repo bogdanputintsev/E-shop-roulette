@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="variables"></div>
+
+    <div id="pjax-container">
+        <section class="feedback">
+            <h3>Отзывы</h3>
+            <div class="container">
+                <div class="row">
+                    <img src="/img/feedback/feedback.png" alt="Отзывы наших клиентов"/>
+                    <div class="fb-comments" data-href="{{ app.request.getUriForPath(app.request.pathInfo) }}" data-width="" data-numposts="5">
+                </div>
+            </div>
+        </section>
+    </div>
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/pjax-master/pjax.js"></script>
+    <script src="/libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="/js/common.js"></script>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <audio id="audio" src="includes/roulette.mp3" autostart="false" ></audio>
+        <section class="offer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="block premium">
+                            <div class="premium-info">
+                                <h2>{{ premium_price }}&#8381;</h2>
+                                <p>{{ premium_description }}</p>
+                                <a class="button" id="button-premium">Испытать удачу</a>
+                            </div>
+                            <h2 class="b-color">{{ premium_name }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="block vip">
+                            <div class="vip-info">
+                                <h2>{{ vip_price }}&#8381;</h2>
+                                <p>{{ vip_description }}</p>
+                                <a class="button" id="button-vip">Испытать удачу</a>
+                            </div>
+                        </div>
+                        <h2 class="b-color">{{ vip_name }}</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="game-premium" class="game" style="background: url(img/game/background.png) no-repeat center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Ваша игра</h2>
+                        {% if premium_case == "Done" %}
+
+                        <div class="roulette">
+                            <img draggable="false" src="img/game/roulette.png" alt="arrow" class="arrow">
+                            <div class="elements" id="elements-0">
+                                <div class="elements-inner">
+
+                                    {% set rand_val = random(1, premium_drop|length) %}
+                                    {% for game in 1..55 %}
+                                        {% set rand_val = random(1, premium_drop|length) %}
+                                            <img src="img/game/{{ premium_images[rand_val - 1] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ rand_val - 1 }}">
+                                    {% endfor %}
+
+                                    {% set rand_val = random(1, premium_sum) %}
+                                    {% for game in 1..20 %}
+                                        {% set tmp_sum = 0 %}
+                                        {% set rand_val = random(1, premium_sum) %}
+                                        {% for element in 1..premium_drop|length %}
+                                            {% if rand_val < premium_drop[element-1] + tmp_sum %}
+                                                <img src="img/game/{{ premium_images[element - 1] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ element - 1 }}">
+                                                {% set element = premium_drop|length %}
+                                            {% else %}
+                                                {% set tmp_sum = tmp_sum + premium_drop[element-1] %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <a class="button-big" title="Испытать удачу" id="roulette-premium">Испытать удачу!</a>
+                        <a class="activate-info w-color">Как активировать выигрыш?</a>
+                        {% else %}
+                        <div class="roulette">
+                            <i class="fa fa-spin fa-refresh fa-5x" aria-hidden="true"></i>
+                            <h3>На данный момент игра недоступна</h3>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="game-vip" class="game" style="background: url(img/game/background.png) no-repeat center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Ваша игра</h2>
+                        {% if vip_case == "Done" %}
+                        <div class="roulette">
+                            <img draggable="false" src="img/game/roulette.png" alt="arrow" class="arrow">
+                            <div class="elements" id="elements-1">
+                                <div class="elements-inner">
+                                    {% set rand_val = random(1, vip_drop|length) %}
+                                    {% for game in 1..55 %}
+                                        {% set rand_val = random(1, vip_drop|length) %}
+                                        <img src="img/game/{{ vip_images[rand_val - 1] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ rand_val - 1 }}">
+                                    {% endfor %}
+
+                                    {% set rand_val = random(1, vip_sum) %}
+                                    {% for game in 1..20 %}
+                                        {% set tmp_sum = 0 %}
+                                        {% set rand_val = random(1, vip_sum) %}
+                                        {% for element in 1..vip_drop|length %}
+                                            {% if rand_val < vip_drop[element-1] + tmp_sum %}
+                                                <img src="img/game/{{ vip_images[element - 1] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ element - 1 }}">
+                                                {% set element = vip_drop|length %}
+                                            {% else %}
+                                                {% set tmp_sum = tmp_sum + vip_drop[element-1] %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <a class="button-big" title="Испытать удачу" id="roulette-vip">Испытать удачу!</a>
+                        <a class="w-color activate-info">Как активировать выигрыш?</a>
+                        {% else %}
+                        <div class="roulette">
+                            <i class="fa fa-spin fa-refresh fa-5x" aria-hidden="true"></i>
+                            <h3>На данный момент игра не доступна</h3>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cases">
+            <h2>Кейсы с играми</h2>
+            <div class="container">
+                <div class="row">
+                    {% if case_state == "Done" %}
+                        {% for i in 1..cases|length %}
+                            <div class="col-md-3">
+                                <a href="{{ path('cases', { id : cases[i-1]['id']}) }}">
+                                    <div class="case" style="background: url(img/game/{{ cases[i-1]['image_key'] }}-WIDE.png) no-repeat center">
+                                        <div class="info">
+                                            <h3>{{ cases[i-1]['name'] }}</h3>
+                                            <p>{{ cases[i-1]['price'] }}&#8381;</p>
+                                        </div>
+                                        <div class="open">
+                                            <h2>Открыть</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <link rel="stylesheet" href="css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/pjax-master/pjax.js"></script>
+    <script src="libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/dataRoulette.js"></script>
+    <script src="js/dataCases.js"></script>
+    <script src="js/dataUser.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/roulette.js"></script>
+    <script src="js/main.js"></script>
+
+{% endblock %}

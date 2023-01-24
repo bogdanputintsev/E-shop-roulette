@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="pjax-container">
+        <h3>{{ case_name }}</h3>
+
+        <audio id="audio" src="/includes/roulette.mp3" autostart="false" ></audio>
+
+        {% if case_id == 0 %}
+            <section id="game-premium" class="game" style="background: url(/img/game/background.png) no-repeat center; display: block;">
+        {% elseif case_id == 1 %}
+            <section id="game-vip" class="game" style="background: url(/img/game/background.png) no-repeat center; display: block;">
+        {% else %}
+            <section id="game" class="game" style="background: url(/img/game/background.png) no-repeat center">
+        {% endif %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Ваша игра</h2>
+                            {% if game_case == "Done" %}
+                                <div class="roulette">
+                                    <img draggable="false" src="/img/game/roulette.png" width="960" height="356" alt="arrow" class="arrow">
+                                    <div class="elements" id="elements-{{ case_id }}">
+                                        <div class="elements-inner">
+                                            {% set rand_val = random(1, game|length) %}
+                                            {% for i in 1..55 %}
+                                                {% set rand_val = random(1, game|length) %}
+                                                <img src="/img/game/{{ game[rand_val - 1]['image_key'] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ rand_val - 1 }}">
+                                            {% endfor %}
+
+                                            {% set rand_val = random(1, game_array_drop_sum) %}
+
+                                            {% for i in 1..20 %}
+                                                {% set tmp_sum = 0 %}
+                                                {% set rand_val = random(1, game_array_drop_sum) %}
+                                                {% for element in 1..game|length %}
+                                                    {% if rand_val < game[element - 1]['drop_chance'] + tmp_sum %}
+                                                        <img src="/img/game/{{ game[element - 1]['image_key'] }}-MIDDLE.png" width="131" height="160" alt="game" class="element" id="{{ element - 1 }}">
+                                                        {% set element = game|length %}
+                                                    {% else %}
+                                                        {% set tmp_sum = tmp_sum + game[element - 1]['drop_chance'] %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if case_id == 1 %}
+                                    <a class="button-big" id="roulette-vip">Испытать удачу!</a>
+                                {% else %}
+                                    <a class="button-big" id="roulette-premium">Испытать удачу!</a>
+                                {% endif %}
+                            <a class="w-color activate-info">Как активировать выигрыш?</a>
+                            {% else %}
+                                <div class="roulette">
+                                    <i class="fa fa-spin fa-refresh fa-5x" aria-hidden="true"></i>
+                                    <h3>На данный момент игра недоступна</h3>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <section class="stuff">
+            <div class="container">
+                <div class="row">
+                    <p id="case_id" hidden>{{ case_id }}</p>
+                    {% if game|length > 0 %}
+                        <h3>Содержимое кейса</h3>
+                        {% for i in 1..game|length %}
+                            {% if game[i-1]['system'] == 0 %}
+                                <div class="col-md-2">
+                                    <div class="cont">
+                                        <div class="circle" style="background: url(/img/game/{{ game[i-1]['image_key'] }}-WIDE.png) no-repeat center">
+                                            <div class="price">
+                                                <b>{{ game[i-1]['price'] }}&#8381;</b>
+                                            </div>
+                                            <p>{{ game[i-1]['name'] }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if case_description != "" %}
+                    <div class="col-md-12">
+                        <h3>Описание</h3>
+                        <div class="editable"><p>{{ case_description }}</p></div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/pjax-master/pjax.js"></script>
+    <script src="/libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/dataRoulette.js"></script>
+    <script src="/js/dataCases.js"></script>
+    <script src="/js/dataUser.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/view.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/roulette.js"></script>
+    <script src="/js/cases.js"></script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="background-404">
+        <img src="img/404.png" alt="404 Страница не найдена">
+        <h1>Ошибка 404</h1>
+        <p>Переход на главную страницу через <span id="countdown">5</span> секунд</p>
+    </div>
+
+    <link rel="stylesheet" href="/css/main.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+    <script src="/js/404.js"></script>
+{% endblock %}
